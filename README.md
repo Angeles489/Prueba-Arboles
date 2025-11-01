@@ -143,6 +143,14 @@ Buscar 15: No encontrado
     └──14
         └──13
 
+## 👨‍💻 Autores
 
+| Nombre                          | Matrícula |
+| ------------------------------- | --------- |
+| **Ángel Landín López**          | A00574700 |
+| **Ángeles Araiza García**       | A00574806 |
+| **Carlos Andrés Gloria Cortes** | A00574714 |
+| **Mónica Isabel Torres García** | A00573457 |
 
+## 🎥 Video Explicativo (YouTube)
 
