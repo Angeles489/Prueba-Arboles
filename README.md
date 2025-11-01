@@ -1,132 +1,148 @@
-# Prueba-Arboles
-# 🌳 Binary Search Tree (BST) Implementation in C++
+# 🌳 Binary Search Tree (BST) - Implementación en C++
 
-Este proyecto implementa desde cero una estructura de datos **Árbol Binario de Búsqueda (Binary Search Tree)** en C++, aplicando los principios de:
-- Nodos enlazados dinámicamente
-- Inserción y búsqueda ordenada
-- Recorridos del árbol (inorden, preorden, postorden)
-- Operaciones CRUD: Crear, Leer, Actualizar (mediante reemplazo de nodo), y Eliminar
-- Visualización del árbol en consola
+Este proyecto implementa desde cero una estructura de datos **Árbol Binario de Búsqueda (Binary Search Tree - BST)** en **C++**, aplicando los conceptos fundamentales de estructuras dinámicas enlazadas, recursividad y operaciones CRUD.
 
 ---
 
-## 🧠 Descripción General
+## 🧠 Objetivo
 
-Un **árbol binario de búsqueda (BST)** es una estructura de datos jerárquica donde:
-- Cada nodo tiene **un valor** y **dos hijos** (izquierdo y derecho).
-- Los valores del **subárbol izquierdo** son **menores** que la raíz.
-- Los valores del **subárbol derecho** son **mayores** que la raíz.
+El objetivo del proyecto es diseñar, implementar y probar un **BST** utilizando **programación orientada a objetos (OOP)** y **nodos enlazados dinámicamente**, cumpliendo con los siguientes requisitos:
 
-Esto permite realizar operaciones de búsqueda, inserción y eliminación en tiempo promedio **O(log n)**.
+### 🧩 Características solicitadas
+
+### Clase `Node`
+Atributos:
+- `int key`
+- `Node* left`
+- `Node* right`
+
+Constructor:
+- Inicializa la clave y los punteros en `nullptr`.
+
+### Clase `BinarySearchTree`
+Debe incluir los siguientes métodos:
+| Método | Descripción |
+|---------|--------------|
+| `BinarySearchTree()` | Constructor: inicializa el árbol vacío (`root = nullptr`). |
+| `bool insert(int key)` | Inserta una nueva clave respetando la propiedad del BST. |
+| `bool search(int key)` | Busca una clave y devuelve si existe o no. |
+| `void removeNode(int key)` | Elimina una clave del árbol (considerando los 3 casos: hoja, un hijo o dos hijos). |
+| `void inorder()` | Recorre el árbol en orden (izquierda → raíz → derecha). |
+| `void preorder()` | Recorre el árbol en preorden (raíz → izquierda → derecha). |
+| `void postorder()` | Recorre el árbol en postorden (izquierda → derecha → raíz). |
+| `void display()` | Muestra visualmente (de forma simple) la estructura del árbol. |
 
 ---
 
 ## 🏗️ Estructura del Proyecto
 
-
 ---
 
-## ⚙️ Implementación
+## ⚙️ Descripción de los Métodos Principales
 
-### 🔹 Clase `BinarySearchTree`
-Contiene toda la lógica del árbol binario, incluyendo un `struct Node` interno.
+### 🔹 `insert(int value)`
+Inserta un nuevo nodo en el árbol de forma ordenada:
+- Si el árbol está vacío, el nodo se convierte en la raíz.
+- Si el valor ya existe, no se inserta (evita duplicados).
+- Inserta recursivamente en el subárbol izquierdo o derecho según corresponda.
 
-#### **Atributos principales**
-| Atributo | Descripción |
-|-----------|--------------|
-| `Node* root` | Puntero al nodo raíz del árbol |
+### 🔹 `search(int value)`
+Busca un valor de manera recursiva:
+- Retorna `true` si encuentra el valor.
+- Retorna `false` si no existe en el árbol.
 
-#### **Métodos públicos**
-| Método | Descripción |
-|---------|--------------|
-| `BinarySearchTree()` | Constructor: inicializa el árbol vacío |
-| `bool insert(int value)` | Inserta un nuevo valor en el árbol |
-| `bool search(int value)` | Busca un valor y devuelve `true` o `false` |
-| `bool remove(int value)` | Elimina un nodo según su valor |
-| `void display()` | Muestra la estructura del árbol en consola |
+### 🔹 `removeNode(int value)`
+Elimina un nodo del árbol, manejando los tres casos clásicos:
+1. **Nodo hoja:** se elimina directamente.  
+2. **Nodo con un hijo:** se reemplaza por su hijo.  
+3. **Nodo con dos hijos:** se sustituye por el valor mínimo del subárbol derecho (sucesor inorder).
 
-#### **Métodos privados auxiliares**
-| Método | Descripción |
-|---------|--------------|
-| `Node* remove(Node* current, int value)` | Implementa la eliminación recursiva (3 casos) |
-| `Node* findMin(Node* node)` | Encuentra el nodo con el menor valor (sucesor inorder) |
-| `void display(Node* node, int space)` | Imprime el árbol en formato visual sideways |
+### 🔹 `inorder()`, `preorder()`, `postorder()`
+Recorridos recursivos del árbol:
+- **Inorder:** imprime los valores ordenados de menor a mayor.
+- **Preorder:** imprime primero la raíz, luego los subárboles.
+- **Postorder:** imprime primero los hijos, luego la raíz.
 
----
+### 🔹 `display()`
+Muestra visualmente la estructura jerárquica del árbol en consola, con un formato amigable como:
 
-## 🔍 Casos de eliminación manejados
 
-1. **Nodo hoja (sin hijos):** se elimina directamente.  
-2. **Nodo con un hijo:** se conecta el padre con el hijo, “saltando” el nodo.  
-3. **Nodo con dos hijos:** se reemplaza por el **sucesor inorder** (menor del subárbol derecho).
 
 ---
 
 ## 💻 Ejemplo de uso (`main.cpp`)
 
 ```cpp
-#include "include/BinarySearchTree.h"
 #include <iostream>
+#include "../include/BinarySearchTree.h"
 using namespace std;
 
 int main() {
-    BinarySearchTree bst;
+    BinarySearchTree* bst = new BinarySearchTree();
 
     // Inserción
-    bst.insert(50);
-    bst.insert(30);
-    bst.insert(70);
-    bst.insert(20);
-    bst.insert(40);
-    bst.insert(60);
-    bst.insert(80);
+    bst->insert(8);
+    bst->insert(3);
+    bst->insert(10);
+    bst->insert(1);
+    bst->insert(6);
+    bst->insert(14);
+    bst->insert(4);
+    bst->insert(7);
+    bst->insert(13);
 
-    cout << "Árbol inicial:\n";
-    bst.display();
+    cout << "\n=== DISPLAY DEL ÁRBOL ===\n";
+    bst->display();
 
-    // Eliminación de diferentes casos
-    cout << "\nEliminar nodo hoja (20):\n";
-    bst.remove(20);
-    bst.display();
+    cout << "\n=== RECORRIDOS ===\n";
+    cout << "Inorder: "; bst->inorder(); cout << endl;
+    cout << "Preorder: "; bst->preorder(); cout << endl;
+    cout << "Postorder: "; bst->postorder(); cout << endl;
 
-    cout << "\nEliminar nodo con un hijo (30):\n";
-    bst.remove(30);
-    bst.display();
+    cout << "\n=== BUSQUEDA ===\n";
+    cout << "Buscar 6: " << (bst->search(6) ? "Encontrado" : "No encontrado") << endl;
+    cout << "Buscar 15: " << (bst->search(15) ? "Encontrado" : "No encontrado") << endl;
 
-    cout << "\nEliminar nodo con dos hijos (50):\n";
-    bst.remove(50);
-    bst.display();
+    cout << "\n=== ELIMINACIONES ===\n";
+    bst->removeNode(1);   // hoja
+    bst->removeNode(6);   // dos hijos
+    bst->removeNode(10);  // un hijo
 
+    cout << "\nÁrbol después de eliminar 1, 6 y 10:\n";
+    bst->display();
+
+    delete bst;
     return 0;
 }
 
-Árbol inicial:
-          80
-     70
-          60
-50
-          40
-     30
-          20
+=== DISPLAY DEL ÁRBOL ===
+└──8
+    ├──3
+    │   ├──1
+    │   └──6
+    │       ├──4
+    │       └──7
+    └──10
+        └──14
+            └──13
 
-Eliminar nodo hoja (20):
-          80
-     70
-          60
-50
-          40
-     30
+=== RECORRIDOS ===
+Inorder: 1 3 4 6 7 8 10 13 14
+Preorder: 8 3 1 6 4 7 10 14 13
+Postorder: 1 4 7 6 3 13 14 10 8
 
-Eliminar nodo con un hijo (30):
-          80
-     70
-          60
-50
-          40
+=== BUSQUEDA ===
+Buscar 6: Encontrado
+Buscar 15: No encontrado
 
-Eliminar nodo con dos hijos (50):
-          80
-     70
-          60
-40
+=== ELIMINACIONES ===
+Árbol después de eliminar 1, 6 y 10:
+└──8
+    ├──3
+    │   └──4
+    └──14
+        └──13
+
+
+
 
